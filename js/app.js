@@ -18,18 +18,24 @@ $(function() {
 
 
   	$("#form").submit(function(e){
+		
   		e.preventDefault();
 		  var dateiss = $("#date").val();
+			const currentDate = new Date(dateiss);
+			const timestamp = (currentDate.getTime()/1000);
 
-  		alert(dateiss);	
-	
-const currentDate = new Date(dateiss);
-const timestamp = (currentDate.getTime()/1000);
-alert("Timestamp" +timestamp);	
+			var durationInMinutes = 10;
 
+			currentDate.setMinutes(currentDate.getMinutes() - durationInMinutes);
+			const timesbefore = (currentDate.getTime()/1000);
+			
+			currentDate.setMinutes(currentDate.getMinutes() + (durationInMinutes+10));
+			const timesafter=(currentDate.getTime()/1000);
+		
+			
 		  $.ajax({
 			type: "GET",
-			url: 'https://api.wheretheiss.at/v1/satellites/25544/positions?timestamps='+timestamp+'&units=miles',
+			url: 'https://api.wheretheiss.at/v1/satellites/25544/positions?timestamps='+timesbefore+','+timestamp+','+timesafter+'&units=miles',
 			dataType: "json",
 			success: function (data) {
 				for(var i=0;i<data.length;i++)
@@ -54,6 +60,6 @@ alert("Timestamp" +timestamp);
 			 }
 			
 		});
-   
+
   	});
 });
