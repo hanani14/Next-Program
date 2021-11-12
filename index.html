@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
    <head>
-      <title>Bootstrap Example</title>
+      <title>ISS</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -20,7 +20,7 @@
                <div class="col-md-6">  
                   <form class="form-horizontal" id="form">
                     <fieldset>
-                      <legend>ISS TRACKER</legend>
+                      <legend>Where the ISS at?</legend>
                       <div class="form-group">
                         <label for="date" class="col-lg-3 control-label">Date</label>
                         <div class="col-lg-9">
@@ -30,8 +30,7 @@
                  
                       <div class="form-group">
                         <div class="col-lg-9 col-lg-offset-3">
-                          <button type="reset" class="btn btn-default">Cancel</button>
-                          <button type="submit" class="btn btn-primary">Submit</button>
+                          <button type="submit" class="btn btn-primary">Search</button>
                         </div>
                       </div>
                     </fieldset>
@@ -43,12 +42,16 @@
          <div class="well">
             <div class="row">
                <div class="col-md-12">   
-                  OUTPUT        
+                 <h3> Location ISS </h3>  
+                  <div id="output"></div>
+           
+                
+                  
                </div>
             </div>
          </div>
       </div>
-
+      <script src="./node_modules/tz-lookup/tz.js"></script>
       <script src="js/jquery-3.2.1.min.js"></script>
       <script src="js/bootstrap.min.js"></script>
       <script src="js/moment.min.js"></script>

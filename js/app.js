@@ -32,29 +32,27 @@ alert("Timestamp" +timestamp);
 			url: 'https://api.wheretheiss.at/v1/satellites/25544/positions?timestamps='+timestamp+'&units=miles',
 			dataType: "json",
 			success: function (data) {
+				for(var i=0;i<data.length;i++)
+				{
+					var longitude = data[i].longitude;
+					var latitude = data[i].latitude;
+					var utc = tzlookup(latitude,longitude);
+					var date = new Date(data[i].timestamp * 1000);
+			
+					
+					var timeTi="<h4>"+date+"</h4>";
+					var locationUTC="<p>"+utc+"</p>";
+					var visi="<p>"+data[i].visibility+"</p><br>";
 
-				var profileTemplate = Handlebars.templates['profile'](data);
-				$("#loginC").hide();
-				$("#homeC").hide();
-				$("#pic").hide();
-				$("#profileC").empty();
-				$("#bookingC").hide();
-				$("#profileC").html(profileTemplate).hide().fadeIn(1000);
-
+				 	$("#output").append(timeTi+ locationUTC+ visi); 
+			
+				}   
+				
 			},
-			error: function (xhr, statusText, err) {
-
-				if (xhr.status == 401) {
-					//response text from the server if there is any
-					var responseText = JSON.parse(xhr.responseText);
-					bootbox.alert("Error 401 - Unauthorized: " + responseText.message);
-				}
-
-				if (xhr.status == 404) {
-					bootbox.alert("Error 404 - API resource not found at the server");
-				}
-
-			}
+			error: function() {
+				console.log("error");
+			 }
+			
 		});
    
   	});
